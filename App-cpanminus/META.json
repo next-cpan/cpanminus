@@ -4,7 +4,7 @@
       "- Tatsuhiko Miyagawa"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Milla version v1.0.20, Dist::Zilla version 6.009, CPAN::Meta::Converter version 2.150010",
+   "generated_by" : "Dist::Milla version v1.0.20, Dist::Zilla version 6.012, CPAN::Meta::Converter version 2.150010",
    "license" : [
       "perl_5"
    ],
@@ -48,6 +48,7 @@
             "Module::Build::Tiny" : "0.039",
             "Module::Install" : "0",
             "Perl::Strip" : "0",
+            "Perl::Version" : "0",
             "Test::Pod" : "1.41",
             "Test::Requires" : "0",
             "Tie::File" : "0"
@@ -64,16 +65,16 @@
          }
       }
    },
-   "release_status" : "testing",
+   "release_status" : "stable",
    "resources" : {
       "bugtracker" : {
-         "web" : "https://github.com/miyagawa/cpanminus/issues"
+         "web" : "https://github.com/next-cpan/cpanminus/issues"
       },
-      "homepage" : "https://github.com/miyagawa/cpanminus",
+      "homepage" : "https://github.com/next-cpan/cpanminus",
       "repository" : {
          "type" : "git",
-         "url" : "https://github.com/miyagawa/cpanminus.git",
-         "web" : "https://github.com/miyagawa/cpanminus"
+         "url" : "https://github.com/next-cpan/cpanminus.git",
+         "web" : "https://github.com/next-cpan/cpanminus"
       }
    },
    "version" : "1.7907",
@@ -124,9 +125,11 @@
       "Matt S Trout <>",
       "Matt S Trout <mst@shadowcat.co.uk>",
       "Michael G. Schwern <schwern@pobox.com>",
+      "Michael Schout <mschout@gkg.net>",
       "motemen <motemen@gmail.com>",
       "moznion <moznion@gmail.com>",
       "Nicolas R <atoomic@cpan.org>",
+      "Nicolas R <nicolas@atoomic.org>",
       "Norman Nunley <nnunley@gmail.com>",
       "Olaf Alders <olaf@wundersolutions.com>",
       "Olivier Mengu\u00e9 <dolmen@cpan.org>",
@@ -142,6 +145,7 @@
       "Shoichi Kaji <skaji@cpan.org>",
       "Slaven Rezic <slaven@rezic.de>",
       "Smylers <Smylers@stripey.com>",
+      "Stig Palmquist <stig@stig.io>",
       "Stoned Elipot <stoned.elipot@gmail.com>",
       "Syohei YOSHIDA <syohex@gmail.com>",
       "Tatsuhiko Miyagawa <miyagawa@bulknews.net>",
@@ -156,7 +160,8 @@
       "yappo <yappo@shibuya.pl>",
       "zebardy <zebardy@gmail.com>"
    ],
-   "x_serialization_backend" : "Cpanel::JSON::XS version 3.0233",
+   "x_generated_by_perl" : "v5.30.1",
+   "x_serialization_backend" : "Cpanel::JSON::XS version 4.18",
    "x_static_install" : 0
 }
 
