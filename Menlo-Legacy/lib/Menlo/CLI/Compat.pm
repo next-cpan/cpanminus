@@ -101,6 +101,8 @@ sub new {
         features => {},
         pure_perl => 0,
         cpanfile_path => 'cpanfile',
+        overpan => 1,
+        overpan_source => undef,
         @_,
     }, $class;
 
@@ -224,6 +226,8 @@ sub parse_options {
         'with-all-features' => sub { $self->{features}{__all} = 1 },
         'pp|pureperl!' => \$self->{pure_perl},
         "cpanfile=s" => \$self->{cpanfile_path},
+        'overpan!' => \$self->{overpan},
+        'overpan-source=s' => \$self->{overpan_source},
         $self->install_type_handlers,
         $self->build_args_handlers,
     );
@@ -1464,6 +1468,46 @@ sub fetch_module {
     }
 }
 
+sub OverPAN {
+    my ( $self, $dir, $dist ) = @_;
+
+    return unless $self->{overpan};
+
+    return unless defined $dir && -d $dir;
+    return unless ref $dist;
+
+    my $distname = $dist->{dist};
+    my $version  = $dist->{version};
+
+    return unless defined $distname && defined $version;
+
+    # init once
+    if ( !exists $self->{_overpan_o} ) {
+        eval { require OverPAN; 1 } or do {
+            $self->{_overpan_o} = undef;
+            return;
+        };
+        my @args;
+        push @args, 'source', $self->{overpan_source} if defined $self->{overpan_source};
+        $self->{_overpan_o} = OverPAN->new( @args );
+    }
+
+    return unless my $o = $self->{_overpan_o};
+
+    # patch distro with custom patches
+    my $res = $o->patch( $distname, $version, path => $dir );
+    my $msg = $res->message;
+    if ( $res->success ) {       
+        $self->chat( $msg ) if $res->patched && defined $msg && length $msg;            
+    } else {
+        $msg = qq[Fail to patch $distname using OverPAN] unless defined $msg && length $msg;
+        $self->diag_fail( $msg );
+        return;
+    }
+
+    return 1;
+}
+
 sub unpack {
     my($self, $file, $uri, $dist) = @_;
 
@@ -1476,6 +1520,9 @@ sub unpack {
     unless ($dir) {
         $self->diag_fail("Failed to unpack $file: no directory");
     }
+
+    $self->OverPAN( $dir, $dist );
+
     return $dir;
 }
 

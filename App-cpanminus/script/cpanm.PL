@@ -397,6 +397,24 @@ B<DEPRECATED>: Determines what format to display the scanned
 dependency tree. Available options are C<tree>, C<json>, C<yaml> and
 C<dists>.
 
+=item --overpan, --no-overpan
+
+When L<OverPAN> is installed and `overpan` option is true,
+then it's going to apply patches from OverPAN before installing
+a distributuon.
+
+Default: true
+
+=item --overpan-source="https://..."
+
+When C<--overpan> is enabled, this allows you to set a custom
+source used to apply OverPAN patches.
+
+The source can be a GitHub repo or a local path.
+By default patches for your Perl major version are used.
+
+Default: undef
+
 =over 8
 
 =item tree
